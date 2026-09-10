@@ -23,8 +23,8 @@ import { document } from '@keystone-6/fields-document'
 // if you want to make your own fields, see https://keystonejs.com/docs/guides/custom-fields
 
 // when using Typescript, you can refine your types to a stricter subset by importing
-// the generated types from '.keystone/types'
-import { type Lists } from '.keystone/types'
+// the generated types from './generated/keystone/types'
+import { type Lists } from './generated/keystone/types'
 
 export const lists = {
   User: list({
@@ -91,15 +91,6 @@ export const lists = {
         // we could have used 'User', but then the relationship would only be 1-way
         ref: 'User.posts',
 
-        // this is some customisations for changing how this will look in the AdminUI
-        ui: {
-          displayMode: 'cards',
-          cardFields: ['name', 'email'],
-          inlineEdit: { fields: ['name', 'email'] },
-          linkToItem: true,
-          inlineConnect: true,
-        },
-
         // a Post can only have one author
         //   this is the default, but we show it here for verbosity
         many: false,
@@ -112,16 +103,6 @@ export const lists = {
 
         // a Post can have many Tags, not just one
         many: true,
-
-        // this is some customisations for changing how this will look in the AdminUI
-        ui: {
-          displayMode: 'cards',
-          cardFields: ['name'],
-          inlineEdit: { fields: ['name'] },
-          linkToItem: true,
-          inlineConnect: true,
-          inlineCreate: { fields: ['name'] },
-        },
       }),
     },
   }),
@@ -134,9 +115,9 @@ export const lists = {
     //   you can find out more at https://keystonejs.com/docs/guides/auth-and-access-control
     access: allowAll,
 
-    // setting this to isHidden for the user interface prevents this list being visible in the Admin UI
+    // setting hideNavigation for the user interface prevents this list being visible in the Admin UI navigation
     ui: {
-      isHidden: true,
+      hideNavigation: true,
     },
 
     // this is the fields for our Tag list

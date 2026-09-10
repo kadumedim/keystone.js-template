@@ -37,7 +37,7 @@ export default withAuth(
         const sudoContext = context.sudo()
         if ((await sudoContext.db.User.count()) !== 0) return
 
-        const password = crypto.getRandomValues(new Uint8Array(16)).toHex()
+        const password = Buffer.from(crypto.getRandomValues(new Uint8Array(16))).toString('hex')
         await sudoContext.db.User.createOne({
           data: { name: 'admin', email: 'admin@example.com', password },
         })
